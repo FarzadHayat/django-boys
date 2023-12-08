@@ -1,0 +1,24 @@
+{% extends 'projects/base.html' %} {% block content %}
+<article class="project-container">
+  <aside>
+    {% if project.published_date %}
+    <time class="time">{{ project.published_date }}</time>
+    {% else %}
+    <p>[Draft]</p>
+    {% endif %} {% if user.is_authenticated %}
+    <div class="actions">
+      <a href="{% url 'project_edit' pk=project.pk %}">{% include './icons/pencil-fill.svg' %}</a>
+      <a href="{% url 'project_delete' pk=project.pk %}"
+        >{% include './icons/file-earmark-x.svg' %}</a
+      >
+    </div>
+    {% endif %}
+  </aside>
+  <p class="author">{{ project.author }}</p>
+  <h2 class="project-title">{{ project.title }}</h2>
+  <p class="project-text">{{ project.text | linebreaksbr }}</p>
+  {% if project.image_url %}
+  <img class="project-image" src="{{ project.image_url }}" alt="image goes here" />
+  {% endif %}
+</article>
+{% endblock %}
