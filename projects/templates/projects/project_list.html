@@ -25,7 +25,7 @@
             </aside>
             <p class="author">{{ project.author }}</p>
             <h2 class="project-title">{{ project.title }}</h2>
-            <p class="project-text">{{ project.text }}</p>
+            <p class="project-text">{{ project.text | linebreaksbr }}</p>
             {% if project.image_url %}
             <img
               class="project-image"
