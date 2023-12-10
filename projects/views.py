@@ -18,7 +18,7 @@ def project_detail(request, pk):
 
 def project_new(request):
     if request.method == "POST":
-        form = ProjectForm(request.POST)
+        form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             project = form.save(commit=False)
             project.author = request.user
@@ -35,7 +35,7 @@ def project_edit(request, pk):
     if request.user != project.author:
         return redirect("project_detail", pk)
     if request.method == "POST":
-        form = ProjectForm(request.POST, instance=project)
+        form = ProjectForm(request.POST, request.FILES, instance=project)
         if form.is_valid():
             project = form.save(commit=False)
             project.author = request.user
@@ -51,5 +51,6 @@ def project_delete(request, pk):
     project = get_object_or_404(Project, pk=pk)
     if request.user != project.author:
         return redirect("project_detail", pk)
+    project.image.delete()
     project.delete()
     return redirect("project_list")

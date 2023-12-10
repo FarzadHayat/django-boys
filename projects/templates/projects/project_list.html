@@ -8,8 +8,8 @@
     <a href="{% url 'project_detail' pk=project.pk %}">{{ project.title }}</a>
   </h2>
   <p class="project-text">{{ project.text | linebreaksbr }}</p>
-  {% if project.image_url %}
-  <img class="project-image" src="{{ project.image_url }}" alt="image goes here" />
+  {% if project.image %}
+  <img class="project-image" src="{{ project.image.url }}" alt="image goes here" />
   {% endif %}
 </article>
 {% endfor %} {% endblock %}
